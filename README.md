@@ -1,74 +1,179 @@
-# 🧺 LaundryPro — Mini Laundry Order Management System
+#  LaundryPro — Mini Laundry Order Management System
 
-A full-stack laundry/dry cleaning order management system built with **Node.js**, **React**, and **SQLite** — built AI-first in under 3 hours.
+A full-stack laundry/dry cleaning order management system built with **Node.js**, **React**, and **SQLite**.
+
+![Create Order](screenshots/create-order.png)
 
 ---
 
-## 🚀 Setup Instructions
+##  Setup Instructions
 
 ### Prerequisites
-- **Node.js** v18+
+- **Node.js** v18+ installed
 - **npm** v9+
 
-### 1. Clone & Start Backend
+### 1. Clone the repository
+```bash
+git clone https://github.com/rizzlingDuck/laundry-manager.git
+cd laundry-manager
+```
+
+### 2. Start the Backend
 ```bash
 cd server
 npm install
-node src/index.js
+npm run dev
 ```
-API runs on **http://localhost:3001**
+The API will start on **http://localhost:3001**
 
-### 2. Start Frontend
+### 3. Start the Frontend
 ```bash
 cd client
 npm install
 npm run dev
 ```
-App opens on **http://localhost:3000**
+The frontend will start on **http://localhost:3000**
 
-### 3. Use It
-1. Open **http://localhost:3000**
+### 4. Use the App
+1. Open **http://localhost:3000** in your browser
 2. **Register** a new account (any username/password)
 3. Start creating orders!
 
-### 4. Postman (Optional)
-Import `postman_collection.json` from the root directory.  
-Run **Login** first → token auto-saves → all other requests work.
+---
+
+##  Features Implemented
+
+### Core Features
+| Feature | Status | Description |
+|---------|--------|-------------|
+| Create Order | ✅ | Customer name, phone, garment selection with quantity & pricing |
+| Unique Order ID | ✅ | Auto-generated `ORD-XXXXXXXX` format |
+| Total Bill Calculation | ✅ | Real-time calculation as items are added |
+| Order Status Management | ✅ | RECEIVED → PROCESSING → READY → DELIVERED (forward-only) |
+| View All Orders | ✅ | Paginated list with all order details |
+| Filter by Status | ✅ | One-click filter buttons for each status |
+| Filter by Customer/Phone | ✅ | Search bar with auto-detection (digits = phone, text = name) |
+| Dashboard | ✅ | Total orders, revenue, orders per status, top garments, recent orders |
+
+### Bonus Features
+| Feature | Status | Description |
+|---------|--------|-------------|
+| React Frontend | ✅ | Full SPA with React + Vite |
+| JWT Authentication | ✅ | Register/Login with token-based auth |
+| SQLite Database | ✅ | Persistent data storage with better-sqlite3 |
+| Search by Garment Type | ✅ | Filter orders containing specific garment types |
+| Estimated Delivery Date | ✅ | Auto-calculated based on garment processing times |
+| Delete Order | ✅ | Can delete orders in RECEIVED status only |
 
 ---
 
-## ✅ Features Implemented
+##  Tech Stack
 
-### Core Features (All Working)
-| Feature | Status | Details |
-|---------|--------|---------|
-| Create Order | ✅ | Customer name, phone, garment picker, quantity, auto-pricing |
-| Unique Order ID | ✅ | `ORD-XXXXXXXX` format with collision retry |
-| Total Bill Calculation | ✅ | Real-time calculation, floating-point precision handling |
-| Order Status Management | ✅ | RECEIVED → PROCESSING → READY → DELIVERED |
-| Status Transition Rules | ✅ | Forward-only, no skipping (RECEIVED can't jump to READY) |
-| View All Orders | ✅ | Paginated list, 20 per page |
-| Filter by Status | ✅ | One-click filter buttons |
-| Filter by Name / Phone | ✅ | Auto-detects digits vs text |
-| Dashboard | ✅ | Total orders, revenue, status breakdown, top garments, recent orders |
+| Layer | Technology |
+|-------|-----------|
+| Backend | Node.js + Express |
+| Database | SQLite (better-sqlite3) |
+| Auth | JWT + bcryptjs |
+| Frontend | React 19 + Vite |
+| Routing | React Router v7 |
+| HTTP Client | Axios |
+| Styling | Vanilla CSS (dark theme) |
 
-### Bonus Features (All Working)
-| Feature | Status | Details |
-|---------|--------|---------|
-| React Frontend | ✅ | Full SPA with dark-mode design system |
-| JWT Authentication | ✅ | Register/login, token-protected routes |
-| SQLite Database | ✅ | Persistent storage with WAL mode, indexes, foreign keys |
-| Search by Garment Type | ✅ | Filter orders containing specific garments |
-| Estimated Delivery Date | ✅ | Auto-calculated from garment processing times |
-| Postman Collection | ✅ | 20 requests including edge case tests |
+---
 
-### Edge Case Handling (48 cases)
-| Category | Examples |
-|----------|----------|
-| Input Validation | Whitespace-only names, negative quantities, non-numeric pagination |
-| Security | Bcrypt DoS protection (72-char max), JSON body size limit (1MB) |
-| Data Integrity | UUID collision retry, transaction-safe deletes, float precision rounding |
-| UX Protection | Double-submit prevention, phone input digit-only restriction |
+##  Project Structure
+
+```
+laundry-manager/
+├── server/                     # Backend API
+│   ├── src/
+│   │   ├── config/
+│   │   │   └── pricing.js      # Garment prices & processing times
+│   │   ├── middleware/
+│   │   │   └── auth.js         # JWT authentication middleware
+│   │   ├── routes/
+│   │   │   ├── auth.js         # Register/Login endpoints
+│   │   │   ├── orders.js       # CRUD + filters for orders
+│   │   │   └── dashboard.js    # Dashboard statistics
+│   │   ├── db.js               # SQLite database setup
+│   │   └── index.js            # Express server entry point
+│   ├── data/                   # SQLite database file (auto-created)
+│   └── package.json
+├── client/                     # React Frontend
+│   ├── src/
+│   │   ├── components/
+│   │   │   └── Layout.jsx      # Sidebar layout
+│   │   ├── pages/
+│   │   │   ├── AuthPage.jsx    # Login/Register
+│   │   │   ├── DashboardPage.jsx
+│   │   │   ├── OrdersPage.jsx  # Orders list with filters
+│   │   │   ├── CreateOrderPage.jsx
+│   │   │   └── OrderDetailPage.jsx
+│   │   ├── api.js              # Axios instance with JWT interceptor
+│   │   ├── App.jsx             # Main app with routing
+│   │   ├── main.jsx            # Entry point
+│   │   └── index.css           # Full design system
+│   ├── index.html
+│   └── package.json
+├── .gitignore
+└── README.md
+```
+
+---
+
+##  API Documentation
+
+### Authentication
+| Method | Endpoint | Body | Description |
+|--------|----------|------|-------------|
+| POST | `/api/auth/register` | `{ username, password }` | Register new user |
+| POST | `/api/auth/login` | `{ username, password }` | Login, returns JWT |
+
+### Orders (Requires JWT)
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | `/api/orders` | Create order |
+| GET | `/api/orders` | List orders (with filters) |
+| GET | `/api/orders/:id` | Get single order |
+| PATCH | `/api/orders/:id/status` | Update order status |
+| DELETE | `/api/orders/:id` | Delete order (RECEIVED only) |
+
+### Dashboard (Requires JWT)
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/dashboard` | Get all dashboard stats |
+
+### Public
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/health` | Health check |
+| GET | `/api/pricing` | Get garment pricing |
+
+#### Query Parameters for GET `/api/orders`
+- `status` — Filter by status (RECEIVED, PROCESSING, READY, DELIVERED)
+- `customer` — Filter by customer name (partial match)
+- `phone` — Filter by phone number (partial match)
+- `garment` — Filter by garment type (partial match)
+- `page` — Page number (default: 1)
+- `limit` — Items per page (default: 50)
+
+#### Create Order Body
+```json
+{
+  "customerName": "Rahul Sharma",
+  "phone": "9876543210",
+  "items": [
+    { "garmentType": "Shirt", "quantity": 3 },
+    { "garmentType": "Pants", "quantity": 2 },
+    { "garmentType": "Saree", "quantity": 1 }
+  ]
+}
+```
+
+#### Update Status Body
+```json
+{ "status": "PROCESSING" }
+```
 
 ---
 
@@ -144,105 +249,22 @@ Run **Login** first → token auto-saves → all other requests work.
 
 ---
 
-## 📁 Project Structure
+##  Screenshots
 
-```
-laundry-manager/
-├── server/                     # Backend API
-│   ├── src/
-│   │   ├── config/
-│   │   │   └── pricing.js      # Garment prices & processing times
-│   │   ├── middleware/
-│   │   │   └── auth.js         # JWT authentication middleware
-│   │   ├── routes/
-│   │   │   ├── auth.js         # Register/Login endpoints
-│   │   │   ├── orders.js       # CRUD + filters for orders
-│   │   │   └── dashboard.js    # Dashboard statistics
-│   │   ├── db.js               # SQLite database setup
-│   │   └── index.js            # Express server entry point
-│   └── package.json
-├── client/                     # React Frontend
-│   ├── src/
-│   │   ├── components/
-│   │   │   └── Layout.jsx      # Sidebar layout
-│   │   ├── pages/
-│   │   │   ├── AuthPage.jsx    # Login/Register
-│   │   │   ├── DashboardPage.jsx
-│   │   │   ├── OrdersPage.jsx  # Orders list + filters
-│   │   │   ├── CreateOrderPage.jsx
-│   │   │   └── OrderDetailPage.jsx
-│   │   ├── api.js              # Axios + JWT interceptors
-│   │   ├── App.jsx             # Router + auth guard
-│   │   └── index.css           # Design system
-│   └── package.json
-├── postman_collection.json     # API collection (20 requests)
-├── .gitignore
-└── README.md
-```
+### Login Page
+Clean auth UI with register/login toggle.
 
----
+### Dashboard
+Stats cards showing total orders, revenue, today's metrics. Bar chart for order status distribution. Top garments and recent orders table.
 
-## 📡 API Reference
+### Create Order
+Form with customer details, dynamic garment picker with auto-pricing, real-time order summary.
 
-### Authentication
-| Method | Endpoint | Body | Response |
-|--------|----------|------|----------|
-| POST | `/api/auth/register` | `{ username, password }` | `{ token, user }` |
-| POST | `/api/auth/login` | `{ username, password }` | `{ token, user }` |
+### Order Detail
+Full order details with status pipeline visualization. One-click status update button.
 
-### Orders (JWT Required)
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| POST | `/api/orders` | Create order |
-| GET | `/api/orders` | List orders (with filters) |
-| GET | `/api/orders/:id` | Get single order |
-| PATCH | `/api/orders/:id/status` | Update order status |
-| DELETE | `/api/orders/:id` | Delete order (RECEIVED only) |
-
-### Dashboard (JWT Required)
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/dashboard` | All dashboard stats |
-
-### Public
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/health` | Health check |
-| GET | `/api/pricing` | Garment pricing |
-
-#### Filter Parameters for `GET /api/orders`
-```
-?status=RECEIVED          # Filter by status
-?customer=Rahul           # Search by name (partial match)
-?phone=9876               # Search by phone (partial match)
-?garment=Saree            # Filter by garment type
-?page=1&limit=20          # Pagination
-```
-
-#### Create Order Body
-```json
-{
-  "customerName": "Rahul Sharma",
-  "phone": "9876543210",
-  "items": [
-    { "garmentType": "Shirt", "quantity": 3 },
-    { "garmentType": "Pants", "quantity": 2 }
-  ]
-}
-```
-
----
-
-## 🏗️ Tech Stack
-
-| Layer | Technology | Why |
-|-------|-----------|-----|
-| Backend | Node.js + Express | Fast to scaffold, widely understood |
-| Database | SQLite (better-sqlite3) | Zero config, file-based, production-capable |
-| Auth | JWT + bcryptjs | Stateless auth, secure password hashing |
-| Frontend | React 19 + Vite | Fast dev server, modern tooling |
-| HTTP Client | Axios | Interceptors for auto-token injection |
-| Styling | Vanilla CSS | No build complexity, full control |
+### Orders List
+Filterable, searchable, paginated table of all orders.
 
 ---
 
