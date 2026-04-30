@@ -4,6 +4,19 @@ A full-stack laundry/dry cleaning order management system built with **Node.js**
 
 ---
 
+## 🌐 Live Demo
+
+- **Frontend UI:** [https://laundry-manager-1.onrender.com](https://laundry-manager-1.onrender.com)
+- **Backend API:** [https://laundry-manager-wrjf.onrender.com](https://laundry-manager-wrjf.onrender.com)
+
+> [!WARNING]
+> **Cold Start Delay:** This project is deployed on Render's free tier. If the backend hasn't received traffic in 15 minutes, it will spin down. **The first request may take up to 50 seconds to respond** while the server wakes up. Please be patient on the first load!
+
+> [!NOTE]
+> **Database Persistence:** Because the free tier uses an ephemeral filesystem, the SQLite database will reset to its initial state every time the server spins down. For a production system, this would be swapped to a persistent PostgreSQL instance via an ORM, but the ephemeral SQLite is used here to safely demonstrate the architecture.
+
+---
+
 ##  Setup Instructions
 
 ### Prerequisites
