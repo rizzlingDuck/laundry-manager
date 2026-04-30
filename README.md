@@ -247,6 +247,3 @@ laundry-manager/
 
 ---
 
-## 📄 License
-
-MIT
