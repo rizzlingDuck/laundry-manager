@@ -2,8 +2,6 @@
 
 A full-stack laundry/dry cleaning order management system built with **Node.js**, **React**, and **SQLite**.
 
-![Create Order](screenshots/create-order.png)
-
 ---
 
 ##  Setup Instructions
@@ -246,25 +244,6 @@ laundry-manager/
 7. **Receipt generation** — PDF receipt download for each order
 8. **Barcode/QR** — Print barcodes for physical order tracking
 9. **Bulk status update** — Select multiple orders and update status at once
-
----
-
-##  Screenshots
-
-### Login Page
-Clean auth UI with register/login toggle.
-
-### Dashboard
-Stats cards showing total orders, revenue, today's metrics. Bar chart for order status distribution. Top garments and recent orders table.
-
-### Create Order
-Form with customer details, dynamic garment picker with auto-pricing, real-time order summary.
-
-### Order Detail
-Full order details with status pipeline visualization. One-click status update button.
-
-### Orders List
-Filterable, searchable, paginated table of all orders.
 
 ---
 
