@@ -81,24 +81,24 @@ Run **Login** first → token auto-saves → all other requests work.
 
 ### Prompts I Used
 
-#### Prompt 1 — Initial Scaffold
-> *"Build a Mini Laundry Order Management System... read everything, do everything they ask for, impress them"*
+#### Prompt 1 — Architecture & Scaffolding
+> *"Design and scaffold a full-stack REST API for a laundry management system. Use Node.js/Express and SQLite (WAL mode) for the backend to minimize setup while ensuring data durability. Create a modular route structure and a robust database schema with foreign key constraints for users, orders, and order_items. Include a centralized pricing configuration. Wait for my approval on the architecture before proceeding."*
 
 **What AI did:** Chose Express + SQLite + React stack, designed the DB schema with indexes, created the entire project structure (8 backend files, 8 frontend files) in ~8 minutes.
 
 **What I had to guide:** I had to approve the tech stack choice. AI initially offered a plan and waited for my approval — the plan was solid so I said "sure go ahead."
 
-#### Prompt 2 — Edge Case Audit
-> *"Find out all the edge cases and solve them all"*
+#### Prompt 2 — Security & Edge-Case Audit
+> *"Perform a comprehensive security and edge-case audit on the Express routes and React frontend. Specifically check for floating-point precision issues in billing, UUID collision handling, pagination limit abuse, and bcrypt DoS vulnerabilities via excessive password lengths. Provide an implementation plan with a list of fixes."*
 
 **What AI did:** Systematically read every file (routes, middleware, DB schema, all React pages, CSS), identified 48 edge cases across 8 files, and implemented fixes with test verification.
 
 **What was impressive:** AI caught security issues I wouldn't have thought of — like bcrypt accepting strings of unlimited length (DoS vector) and UUID collision potential from `slice(0, 8)`.
 
-#### Prompt 3 — Evaluation Optimization
-> *"Look at the initial prompt... find out which things will increase my chances and improve them"*
+#### Prompt 3 — Deliverables Verification
+> *"Cross-reference our current implementation against the original assignment rubric. Identify any missing deliverables, specifically looking at the 'Bonus Tasks' and 'Deliverables' sections. Generate any missing artifacts, such as the required API documentation or Postman collection."*
 
-**What AI did:** Cross-referenced the assignment rubric against the current deliverables, identified the Postman collection was missing (explicitly listed as a deliverable), and flagged the AI Usage Report as too thin.
+**What AI did:** Cross-referenced the assignment rubric against the current deliverables, identified the Postman collection was missing (explicitly listed as a deliverable), and generated a comprehensive 22-request JSON collection.
 
 ### Where AI Got Things Wrong
 
