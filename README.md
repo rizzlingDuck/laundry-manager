@@ -227,7 +227,7 @@ laundry-manager/
 ### What I Skipped (and Why)
 | Skipped | Reason |
 |---------|--------|
-| **Deployment** | Focused time on code quality, edge cases, and documentation instead. Would deploy to Railway (SQLite-compatible) with more time. |
+| **Deployment & Database Persistence** | Designed for split deployment (Vercel Frontend + Render Backend). Since SQLite is used, the free-tier Render backend has an ephemeral filesystem, meaning the database resets when the instance sleeps. For a production system, I would swap SQLite for PostgreSQL via an ORM, but for this assignment, the ephemeral SQLite is sufficient to demonstrate the architecture. |
 | **Unit tests** | Tested via API calls and browser automation instead. Would add Jest + Supertest with more time. |
 | **Input sanitization library** | Used manual `.trim()` and regex. Would add `express-validator` or `joi` for production. |
 | **Rate limiting** | No API rate limiting. Would add `express-rate-limit` to prevent abuse. |
@@ -246,4 +246,3 @@ laundry-manager/
 9. **Bulk status update** — Select multiple orders and update status at once
 
 ---
-
